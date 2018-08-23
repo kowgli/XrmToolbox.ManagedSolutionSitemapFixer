@@ -14,11 +14,11 @@ using McTools.Xrm.Connection;
 
 namespace ManagedSolutionSitemapFixer
 {
-    public partial class MyPluginControl : PluginControlBase
+    public partial class MyPluginControlClone : PluginControlBase
     {
         private Settings mySettings;
 
-        public MyPluginControl()
+        public MyPluginControlClone()
         {
             InitializeComponent();
         }
