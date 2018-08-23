@@ -29,7 +29,7 @@ namespace ManagedSolutionSitemapFixer
 
         private void MyPluginControl_Load(object sender, EventArgs e)
         {
-            textEditorControl1.Document.HighlightingStrategy = HighlightingManager.Manager.FindHighlighter("XML");
+            teReplacementSitemap.Document.HighlightingStrategy = HighlightingManager.Manager.FindHighlighter("XML");
         }
 
         /// <summary>
@@ -69,12 +69,14 @@ namespace ManagedSolutionSitemapFixer
             try
             {
                 new Helpers.FileChecker().CheckFile(tbSolutionFile.Text);
-                tbSolutionFile.BackColor = goodColor;                
+                tbSolutionFile.BackColor = goodColor;
+                bFix.Enabled = true;
             }
             catch(Exception ex)
             {
                 ShowErrorNotification(ex.Message, null);
                 tbSolutionFile.BackColor = badColor;
+                bFix.Enabled = false;
             }
         }
 
@@ -88,18 +90,43 @@ namespace ManagedSolutionSitemapFixer
 
         private void bLoadFromFile_Click(object sender, EventArgs e)
         {
+            HideNotification();
+
             if (ofdXml.ShowDialog() == DialogResult.OK && File.Exists(ofdXml.FileName))
             {
-                textEditorControl1.Text = File.ReadAllText(ofdXml.FileName);
+                teReplacementSitemap.Text = File.ReadAllText(ofdXml.FileName);
             }
         }
 
         private void bLoadFromSolution_Click(object sender, EventArgs e)
         {
-            string fileContent = new Helpers.ZipHelper().GetFileContent(tbSolutionFile.Text, "customizations.xml");
-            string xml = new Helpers.FileFixer().GetSiteMap(fileContent);
+            HideNotification();
 
-            textEditorControl1.Text = xml;
+            try
+            {
+                string fileContent = new Helpers.ZipHelper().GetFileContent(tbSolutionFile.Text, "customizations.xml");
+                string xml = new Helpers.CustomizationsFileProcessor().GetSiteMap(fileContent);
+
+                teReplacementSitemap.Text = xml;
+            }
+            catch (Exception ex)
+            {
+                ShowErrorNotification(ex.Message, null);
+                tbSolutionFile.BackColor = badColor;
+            }
+        }
+
+        private void bFix_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bSaveToFile_Click(object sender, EventArgs e)
+        {
+            if(sfdXml.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllText(sfdXml.FileName, teReplacementSitemap.Text);
+            }
         }
     }
 }

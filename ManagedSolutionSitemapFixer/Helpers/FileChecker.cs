@@ -20,7 +20,7 @@ namespace ManagedSolutionSitemapFixer.Helpers
 
             string fileContent = new ZipHelper().GetFileContent(path, customizationsFileName);
 
-            bool hasSitemap = new FileFixer().ContainsSiteMap(fileContent);
+            bool hasSitemap = new CustomizationsFileProcessor().ContainsSiteMap(fileContent);
             if(!hasSitemap)
             {
                 throw new Exception("No sitemap inside customizations.xml");

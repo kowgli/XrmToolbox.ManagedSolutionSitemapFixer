@@ -127,7 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\FileChecker.cs" />
-    <Compile Include="Helpers\FileFixer.cs" />
+    <Compile Include="Helpers\CustomizationsFileProcessor.cs" />
     <Compile Include="Helpers\ZipHelper.cs" />
     <Compile Include="ManagedSolutionSitemapFixerPlugin.cs" />
     <Compile Include="MyPluginControl - Copy.cs">

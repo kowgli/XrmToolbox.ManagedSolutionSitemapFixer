@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ManagedSolutionSitemapFixer.Helpers
 {
-    public class FileFixer
+    public class CustomizationsFileProcessor
     {
         private readonly static string sitemapRegex = @"<SiteMap>(.|\n)*?<SiteMap>(.|\n)*?<\/SiteMap>(.|\n)*?<\/SiteMap>";
 

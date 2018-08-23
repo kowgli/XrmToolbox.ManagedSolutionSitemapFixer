@@ -33,11 +33,14 @@
             this.bPickSolutionFile = new System.Windows.Forms.Button();
             this.ofdZip = new System.Windows.Forms.OpenFileDialog();
             this.lbReplacementSitemap = new System.Windows.Forms.Label();
-            this.rtbReplacementSitemap = new System.Windows.Forms.RichTextBox();
             this.bLoadFromSolution = new System.Windows.Forms.Button();
             this.bLoadFromFile = new System.Windows.Forms.Button();
             this.ofdXml = new System.Windows.Forms.OpenFileDialog();
-            this.textEditorControl1 = new ICSharpCode.TextEditor.TextEditorControl();
+            this.teReplacementSitemap = new ICSharpCode.TextEditor.TextEditorControl();
+            this.bFix = new System.Windows.Forms.Button();
+            this.cbCreateBackup = new System.Windows.Forms.CheckBox();
+            this.bSaveToFile = new System.Windows.Forms.Button();
+            this.sfdXml = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // lbSolutionFile
@@ -72,33 +75,23 @@
             // 
             // ofdZip
             // 
-            this.ofdZip.FileName = "openFileDialog";
             this.ofdZip.Filter = "ZIP files|*.zip|All files|*.*";
             this.ofdZip.RestoreDirectory = true;
+            this.ofdZip.Title = "Pick the managed solution file";
             // 
             // lbReplacementSitemap
             // 
             this.lbReplacementSitemap.AutoSize = true;
-            this.lbReplacementSitemap.Location = new System.Drawing.Point(3, 50);
+            this.lbReplacementSitemap.Location = new System.Drawing.Point(3, 55);
             this.lbReplacementSitemap.Name = "lbReplacementSitemap";
             this.lbReplacementSitemap.Size = new System.Drawing.Size(114, 13);
             this.lbReplacementSitemap.TabIndex = 3;
             this.lbReplacementSitemap.Text = "Replacement Sitemap:";
             // 
-            // rtbReplacementSitemap
-            // 
-            this.rtbReplacementSitemap.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.rtbReplacementSitemap.Location = new System.Drawing.Point(6, 75);
-            this.rtbReplacementSitemap.Name = "rtbReplacementSitemap";
-            this.rtbReplacementSitemap.Size = new System.Drawing.Size(681, 83);
-            this.rtbReplacementSitemap.TabIndex = 4;
-            this.rtbReplacementSitemap.Text = "";
-            // 
             // bLoadFromSolution
             // 
-            this.bLoadFromSolution.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.bLoadFromSolution.Location = new System.Drawing.Point(433, 50);
+            this.bLoadFromSolution.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bLoadFromSolution.Location = new System.Drawing.Point(303, 50);
             this.bLoadFromSolution.Name = "bLoadFromSolution";
             this.bLoadFromSolution.Size = new System.Drawing.Size(124, 23);
             this.bLoadFromSolution.TabIndex = 5;
@@ -108,8 +101,8 @@
             // 
             // bLoadFromFile
             // 
-            this.bLoadFromFile.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.bLoadFromFile.Location = new System.Drawing.Point(563, 50);
+            this.bLoadFromFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bLoadFromFile.Location = new System.Drawing.Point(433, 50);
             this.bLoadFromFile.Name = "bLoadFromFile";
             this.bLoadFromFile.Size = new System.Drawing.Size(124, 23);
             this.bLoadFromFile.TabIndex = 6;
@@ -119,29 +112,74 @@
             // 
             // ofdXml
             // 
-            this.ofdXml.FileName = "openFileDialog";
             this.ofdXml.Filter = "XML files|*.xml|All files|*.*";
             this.ofdXml.RestoreDirectory = true;
+            this.ofdXml.Title = "Pick the saved sitemap file";
             // 
-            // textEditorControl1
+            // teReplacementSitemap
             // 
-            this.textEditorControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.teReplacementSitemap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textEditorControl1.Highlighting = null;
-            this.textEditorControl1.Location = new System.Drawing.Point(6, 164);
-            this.textEditorControl1.Name = "textEditorControl1";
-            this.textEditorControl1.Size = new System.Drawing.Size(681, 201);
-            this.textEditorControl1.TabIndex = 7;
+            this.teReplacementSitemap.Highlighting = null;
+            this.teReplacementSitemap.Location = new System.Drawing.Point(6, 79);
+            this.teReplacementSitemap.Name = "teReplacementSitemap";
+            this.teReplacementSitemap.Size = new System.Drawing.Size(681, 251);
+            this.teReplacementSitemap.TabIndex = 7;
+            // 
+            // bFix
+            // 
+            this.bFix.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.bFix.Enabled = false;
+            this.bFix.Location = new System.Drawing.Point(233, 348);
+            this.bFix.Name = "bFix";
+            this.bFix.Size = new System.Drawing.Size(124, 23);
+            this.bFix.TabIndex = 8;
+            this.bFix.Text = "Fix sitemap in solution";
+            this.bFix.UseVisualStyleBackColor = true;
+            this.bFix.Click += new System.EventHandler(this.bFix_Click);
+            // 
+            // cbCreateBackup
+            // 
+            this.cbCreateBackup.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.cbCreateBackup.AutoSize = true;
+            this.cbCreateBackup.Checked = true;
+            this.cbCreateBackup.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbCreateBackup.Location = new System.Drawing.Point(383, 352);
+            this.cbCreateBackup.Name = "cbCreateBackup";
+            this.cbCreateBackup.Size = new System.Drawing.Size(105, 17);
+            this.cbCreateBackup.TabIndex = 9;
+            this.cbCreateBackup.Text = "Create a backup";
+            this.cbCreateBackup.UseVisualStyleBackColor = true;
+            // 
+            // bSaveToFile
+            // 
+            this.bSaveToFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bSaveToFile.Location = new System.Drawing.Point(563, 50);
+            this.bSaveToFile.Name = "bSaveToFile";
+            this.bSaveToFile.Size = new System.Drawing.Size(124, 23);
+            this.bSaveToFile.TabIndex = 10;
+            this.bSaveToFile.Text = "Save to file";
+            this.bSaveToFile.UseVisualStyleBackColor = true;
+            this.bSaveToFile.Click += new System.EventHandler(this.bSaveToFile_Click);
+            // 
+            // sfdXml
+            // 
+            this.sfdXml.DefaultExt = "xml";
+            this.sfdXml.Filter = "XML files|*.xml|All files|*.*";
+            this.sfdXml.RestoreDirectory = true;
+            this.sfdXml.Title = "Save the edited sitemap to a file";
             // 
             // MainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textEditorControl1);
+            this.Controls.Add(this.bSaveToFile);
+            this.Controls.Add(this.cbCreateBackup);
+            this.Controls.Add(this.bFix);
+            this.Controls.Add(this.teReplacementSitemap);
             this.Controls.Add(this.bLoadFromFile);
             this.Controls.Add(this.bLoadFromSolution);
-            this.Controls.Add(this.rtbReplacementSitemap);
             this.Controls.Add(this.lbReplacementSitemap);
             this.Controls.Add(this.bPickSolutionFile);
             this.Controls.Add(this.tbSolutionFile);
@@ -161,10 +199,13 @@
         private System.Windows.Forms.Button bPickSolutionFile;
         private System.Windows.Forms.OpenFileDialog ofdZip;
         private System.Windows.Forms.Label lbReplacementSitemap;
-        private System.Windows.Forms.RichTextBox rtbReplacementSitemap;
         private System.Windows.Forms.Button bLoadFromSolution;
         private System.Windows.Forms.Button bLoadFromFile;
         private System.Windows.Forms.OpenFileDialog ofdXml;
-        private ICSharpCode.TextEditor.TextEditorControl textEditorControl1;
+        private ICSharpCode.TextEditor.TextEditorControl teReplacementSitemap;
+        private System.Windows.Forms.Button bFix;
+        private System.Windows.Forms.CheckBox cbCreateBackup;
+        private System.Windows.Forms.Button bSaveToFile;
+        private System.Windows.Forms.SaveFileDialog sfdXml;
     }
 }
