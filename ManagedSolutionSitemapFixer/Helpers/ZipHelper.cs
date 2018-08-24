@@ -42,6 +42,10 @@ namespace ManagedSolutionSitemapFixer.Helpers
             {
                 throw new Exception(ex.Message);
             }
+            catch (NullReferenceException)
+            {
+                throw new Exception($"File {fileName} not found in zip");
+            }
 
             string extractedFilePath = Path.Combine(tempFolder, fileName);
 
