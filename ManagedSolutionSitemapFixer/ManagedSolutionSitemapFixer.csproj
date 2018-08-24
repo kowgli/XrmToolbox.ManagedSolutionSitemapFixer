@@ -12,6 +12,8 @@
     <AssemblyName>ManagedSolutionSitemapFixer</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -133,12 +135,6 @@
     <Compile Include="Helpers\Statics.cs" />
     <Compile Include="Helpers\ZipHelper.cs" />
     <Compile Include="ManagedSolutionSitemapFixerPlugin.cs" />
-    <Compile Include="MyPluginControl - Copy.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MyPluginControl - Copy.designer.cs">
-      <DependentUpon>MyPluginControl - Copy.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -150,12 +146,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ILMergeConfig.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MyPluginControl - Copy.resx">
-      <DependentUpon>MyPluginControl - Copy.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainControl.resx">
       <DependentUpon>MainControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,6 +164,13 @@
   copy ICSharpCode.TextEditor.dll C:\Progs\Programming\XrmToolbox\Plugins
 )</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\ILMerge.MSBuild.Task.1.0.3\build\ILMerge.MSBuild.Task.targets" Condition="Exists('..\packages\ILMerge.MSBuild.Task.1.0.3\build\ILMerge.MSBuild.Task.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\ILMerge.MSBuild.Task.1.0.3\build\ILMerge.MSBuild.Task.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILMerge.MSBuild.Task.1.0.3\build\ILMerge.MSBuild.Task.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

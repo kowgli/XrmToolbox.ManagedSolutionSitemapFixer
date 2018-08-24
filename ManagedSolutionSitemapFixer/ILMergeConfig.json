@@ -1,0 +1,8 @@
+﻿{
+  "General": {
+    "InputAssemblies": [
+      "DotNetZip.dll",
+      "ICSharpCode.TextEditor.dll"
+    ]
+  }
+}
