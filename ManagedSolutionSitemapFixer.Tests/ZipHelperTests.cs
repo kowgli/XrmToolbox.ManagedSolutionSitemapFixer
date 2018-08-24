@@ -1,12 +1,8 @@
 ﻿using ManagedSolutionSitemapFixer.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ManagedSolutionSitemapFixer.Tests
 {
@@ -21,7 +17,7 @@ namespace ManagedSolutionSitemapFixer.Tests
             string read = "";
 
             using (var zipHelper = new ZipHelper())
-            { 
+            {
                 read = zipHelper.GetFileContent(@"TestFiles\TestSolution_1_0_0_0_managed.zip", "[Content_Types].xml");
             }
 
@@ -46,7 +42,7 @@ namespace ManagedSolutionSitemapFixer.Tests
                 zipHelper.PutFileContent(copiedPath, "test3.txt", "Hello world");
             }
 
-            // Extract using .NET version of zip    
+            // Extract using .NET version of zip
             ZipFile.ExtractToDirectory(copiedPath, tempFolder);
 
             string read = File.ReadAllText(Path.Combine(tempFolder, "test3.txt"));

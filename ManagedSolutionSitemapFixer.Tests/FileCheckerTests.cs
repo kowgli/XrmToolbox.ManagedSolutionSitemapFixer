@@ -1,6 +1,6 @@
-﻿using System;
-using ManagedSolutionSitemapFixer.Helpers;
+﻿using ManagedSolutionSitemapFixer.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace ManagedSolutionSitemapFixer.Tests
 {

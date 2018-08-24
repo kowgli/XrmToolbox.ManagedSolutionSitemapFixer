@@ -1,18 +1,13 @@
 ﻿using ManagedSolutionSitemapFixer.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ManagedSolutionSitemapFixer.Tests
 {
     [TestClass]
     public class CustomizationsFileProcessorTests
     {
-        string xmlWithSitemap = @"<root><node><SiteMap><SiteMap><something></something></SiteMap></SiteMap></node></node>";
-        string xmlWithNoSitemap = @"<root><node></node></node>";
+        private string xmlWithSitemap = @"<root><node><SiteMap><SiteMap><something></something></SiteMap></SiteMap></node></node>";
+        private string xmlWithNoSitemap = @"<root><node></node></node>";
 
         [TestMethod]
         public void When_HasSitemap_SaysSo()

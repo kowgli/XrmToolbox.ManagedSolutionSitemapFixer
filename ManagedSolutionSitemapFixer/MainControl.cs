@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using ICSharpCode.TextEditor.Document;
+using McTools.Xrm.Connection;
+using Microsoft.Xrm.Sdk;
+using System;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using XrmToolBox.Extensibility;
-using Microsoft.Xrm.Sdk.Query;
-using Microsoft.Xrm.Sdk;
-using McTools.Xrm.Connection;
-using System.IO;
-using ICSharpCode.TextEditor.Document;
 
 namespace ManagedSolutionSitemapFixer
 {
@@ -72,7 +65,7 @@ namespace ManagedSolutionSitemapFixer
                 tbSolutionFile.BackColor = goodColor;
                 bFix.Enabled = true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ShowErrorNotification(ex.Message, null);
                 tbSolutionFile.BackColor = badColor;
@@ -84,7 +77,7 @@ namespace ManagedSolutionSitemapFixer
         {
             if (ofdZip.ShowDialog() == DialogResult.OK)
             {
-                tbSolutionFile.Text = ofdZip.FileName;              
+                tbSolutionFile.Text = ofdZip.FileName;
             }
         }
 
@@ -106,13 +99,11 @@ namespace ManagedSolutionSitemapFixer
             {
                 using (var zipHelper = new Helpers.ZipHelper())
                 {
-
                     string fileContent = zipHelper.GetFileContent(tbSolutionFile.Text, Helpers.Statics.CustomizationsFileName);
                     string xml = Helpers.CustomizationsFileProcessor.GetSiteMap(fileContent);
 
                     teReplacementSitemap.Text = xml;
                 }
-
             }
             catch (Exception ex)
             {
@@ -127,7 +118,7 @@ namespace ManagedSolutionSitemapFixer
 
             try
             {
-                if(cbCreateBackup.Checked)
+                if (cbCreateBackup.Checked)
                 {
                     string backupFileName = Helpers.Backuper.Backup(tbSolutionFile.Text);
                     ShowInfoNotification($"Backed up to {backupFileName}", null);
@@ -138,13 +129,13 @@ namespace ManagedSolutionSitemapFixer
             }
             catch (Exception ex)
             {
-                ShowErrorNotification(ex.Message, null);              
+                ShowErrorNotification(ex.Message, null);
             }
         }
 
         private void bSaveToFile_Click(object sender, EventArgs e)
         {
-            if(sfdXml.ShowDialog() == DialogResult.OK)
+            if (sfdXml.ShowDialog() == DialogResult.OK)
             {
                 File.WriteAllText(sfdXml.FileName, teReplacementSitemap.Text);
             }

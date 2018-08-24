@@ -1,11 +1,6 @@
 ﻿using ManagedSolutionSitemapFixer.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ManagedSolutionSitemapFixer.Tests
 {
@@ -14,7 +9,7 @@ namespace ManagedSolutionSitemapFixer.Tests
     {
         [TestMethod]
         public void Can_PerformTheBackup()
-        {   
+        {
             string backupPath = Backuper.Backup(@"TestFiles\text_file.txt");
 
             string read = File.ReadAllText(backupPath);

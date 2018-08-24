@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ManagedSolutionSitemapFixer.Helpers
+﻿namespace ManagedSolutionSitemapFixer.Helpers
 {
     public static class FileFixer
     {
@@ -16,7 +10,6 @@ namespace ManagedSolutionSitemapFixer.Helpers
                 string replacement = replacementSiteMap;
                 string fixedXml = Helpers.CustomizationsFileProcessor.ReplaceSitemap(fileContent, replacement);
                 zipHelper.PutFileContent(sourceFilePath, Helpers.Statics.CustomizationsFileName, fixedXml);
-                
             }
         }
     }
