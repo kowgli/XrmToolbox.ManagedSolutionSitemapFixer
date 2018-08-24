@@ -50,6 +50,7 @@
     <Reference Include="System.IO.Compression.FileSystem" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackuperTests.cs" />
     <Compile Include="FileCheckerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZipHelperTests.cs" />
@@ -77,6 +78,11 @@
       <Project>{32392e57-be54-48a4-888d-4470ba3e7171}</Project>
       <Name>ManagedSolutionSitemapFixer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestFiles\text_file.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
