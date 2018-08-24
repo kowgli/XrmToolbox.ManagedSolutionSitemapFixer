@@ -126,8 +126,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\Backuper.cs" />
     <Compile Include="Helpers\FileChecker.cs" />
     <Compile Include="Helpers\CustomizationsFileProcessor.cs" />
+    <Compile Include="Helpers\FileFixer.cs" />
+    <Compile Include="Helpers\Statics.cs" />
     <Compile Include="Helpers\ZipHelper.cs" />
     <Compile Include="ManagedSolutionSitemapFixerPlugin.cs" />
     <Compile Include="MyPluginControl - Copy.cs">
@@ -162,6 +165,7 @@
     <PostBuildEvent>if $(ConfigurationName) == Debug (
   IF NOT EXIST C:\Progs\Programming\XrmToolbox\Plugins mkdir C:\Progs\Programming\XrmToolbox\Plugins
   copy ManagedSolutionSitemapFixer.dll C:\Progs\Programming\XrmToolbox\Plugins
+  copy ManagedSolutionSitemapFixer.pdb C:\Progs\Programming\XrmToolbox\Plugins
   copy DotNetZip.dll C:\Progs\Programming\XrmToolbox\Plugins
   copy ICSharpCode.TextEditor.dll C:\Progs\Programming\XrmToolbox\Plugins
 )</PostBuildEvent>

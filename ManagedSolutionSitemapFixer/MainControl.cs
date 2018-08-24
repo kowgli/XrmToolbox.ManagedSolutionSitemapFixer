@@ -68,7 +68,7 @@ namespace ManagedSolutionSitemapFixer
 
             try
             {
-                new Helpers.FileChecker().CheckFile(tbSolutionFile.Text);
+                Helpers.FileChecker.CheckFile(tbSolutionFile.Text);
                 tbSolutionFile.BackColor = goodColor;
                 bFix.Enabled = true;
             }
@@ -104,10 +104,15 @@ namespace ManagedSolutionSitemapFixer
 
             try
             {
-                string fileContent = new Helpers.ZipHelper().GetFileContent(tbSolutionFile.Text, "customizations.xml");
-                string xml = new Helpers.CustomizationsFileProcessor().GetSiteMap(fileContent);
+                using (var zipHelper = new Helpers.ZipHelper())
+                {
 
-                teReplacementSitemap.Text = xml;
+                    string fileContent = zipHelper.GetFileContent(tbSolutionFile.Text, Helpers.Statics.CustomizationsFileName);
+                    string xml = Helpers.CustomizationsFileProcessor.GetSiteMap(fileContent);
+
+                    teReplacementSitemap.Text = xml;
+                }
+
             }
             catch (Exception ex)
             {
@@ -118,7 +123,23 @@ namespace ManagedSolutionSitemapFixer
 
         private void bFix_Click(object sender, EventArgs e)
         {
+            HideNotification();
 
+            try
+            {
+                if(cbCreateBackup.Checked)
+                {
+                    string backupFileName = Helpers.Backuper.Backup(tbSolutionFile.Text);
+                    ShowInfoNotification($"Backed up to {backupFileName}", null);
+                }
+
+                Helpers.FileFixer.Fix(tbSolutionFile.Text, teReplacementSitemap.Text);
+                ShowInfoNotification($"Sitemap replaced in {tbSolutionFile.Text}", null);
+            }
+            catch (Exception ex)
+            {
+                ShowErrorNotification(ex.Message, null);              
+            }
         }
 
         private void bSaveToFile_Click(object sender, EventArgs e)

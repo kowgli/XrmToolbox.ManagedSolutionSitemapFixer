@@ -54,7 +54,21 @@ namespace ManagedSolutionSitemapFixer.Helpers
 
         public void PutFileContent(string zipFilePath, string fileName, string content)
         {
-           
+            try
+            {
+                using (ZipFile zip = ZipFile.Read(zipFilePath))
+                {
+                    string replacementFileName = Path.Combine(tempFolder, fileName);
+                    File.WriteAllText(replacementFileName, content);
+
+                    zip.UpdateFile(replacementFileName, "");
+                    zip.Save();
+                }
+            }
+            catch (ZipException ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

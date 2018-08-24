@@ -7,23 +7,24 @@ using System.Threading.Tasks;
 
 namespace ManagedSolutionSitemapFixer.Helpers
 {
-    public class FileChecker
+    public static class FileChecker
     {
-        private readonly static string customizationsFileName = "customizations.xml";
-
-        public void CheckFile(string path)
+        public static void CheckFile(string path)
         {            
             if (!File.Exists(path))
             {
                 throw new Exception("File not found");
             }
 
-            string fileContent = new ZipHelper().GetFileContent(path, customizationsFileName);
+            using (var zipHelper = new ZipHelper())
+            { 
+                string fileContent = zipHelper.GetFileContent(path, Statics.CustomizationsFileName);
 
-            bool hasSitemap = new CustomizationsFileProcessor().ContainsSiteMap(fileContent);
-            if(!hasSitemap)
-            {
-                throw new Exception("No sitemap inside customizations.xml");
+                bool hasSitemap = CustomizationsFileProcessor.ContainsSiteMap(fileContent);
+                if (!hasSitemap)
+                {
+                    throw new Exception("No sitemap inside customizations.xml");
+                }
             }
         }
     }

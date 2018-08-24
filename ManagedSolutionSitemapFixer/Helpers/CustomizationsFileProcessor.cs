@@ -7,22 +7,27 @@ using System.Threading.Tasks;
 
 namespace ManagedSolutionSitemapFixer.Helpers
 {
-    public class CustomizationsFileProcessor
+    public static class CustomizationsFileProcessor
     {
         private readonly static string sitemapRegex = @"<SiteMap>(.|\n)*?<SiteMap>(.|\n)*?<\/SiteMap>(.|\n)*?<\/SiteMap>";
 
-        public bool ContainsSiteMap(string fileContent)
+        public static bool ContainsSiteMap(string fileContent)
         {
             Match match = Regex.Match(fileContent, sitemapRegex);
 
             return match.Success;
         }
 
-        public string GetSiteMap(string fileContent)
+        public static string GetSiteMap(string fileContent)
         {
             Match match = Regex.Match(fileContent, sitemapRegex);
 
             return match.Value;
+        }
+
+        public static string ReplaceSitemap(string fileContent, string replacement)
+        {
+            return Regex.Replace(fileContent, sitemapRegex, replacement);
         }
     }
 }
