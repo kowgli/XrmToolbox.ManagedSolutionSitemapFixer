@@ -16,6 +16,11 @@ namespace ManagedSolutionSitemapFixer.Helpers
         {
             string tempRoot = Path.GetTempPath();
             tempFolder = Path.Combine(tempRoot, $"ManagedSolutionSitemapFixer_{Guid.NewGuid().ToString("N")}");
+            try
+            {
+                Directory.CreateDirectory(tempFolder);
+            }
+            catch { }
         }
 
         public void Dispose()
