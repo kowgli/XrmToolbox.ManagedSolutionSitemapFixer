@@ -10,8 +10,7 @@ using XrmToolBox.Extensibility;
 namespace ManagedSolutionSitemapFixer
 {
     public partial class MainControl : PluginControlBase
-    {
-        private Settings mySettings;
+    {      
         private static readonly Color badColor = Color.FromArgb(250, 76, 76);
         private static readonly Color goodColor = Color.FromArgb(108, 234, 92);
 
@@ -32,8 +31,7 @@ namespace ManagedSolutionSitemapFixer
         /// <param name="e"></param>
         private void MyPluginControl_OnCloseTool(object sender, EventArgs e)
         {
-            // Before leaving, save the settings
-            SettingsManager.Instance.Save(GetType(), mySettings);
+            
         }
 
         /// <summary>
@@ -42,12 +40,6 @@ namespace ManagedSolutionSitemapFixer
         public override void UpdateConnection(IOrganizationService newService, ConnectionDetail detail, string actionName, object parameter)
         {
             base.UpdateConnection(newService, detail, actionName, parameter);
-
-            if (mySettings != null && detail != null)
-            {
-                mySettings.LastUsedOrganizationWebappUrl = detail.WebApplicationUrl;
-                LogInfo("Connection has changed to: {0}", detail.WebApplicationUrl);
-            }
         }
 
         private void tbSolutionFile_TextChanged(object sender, EventArgs e)

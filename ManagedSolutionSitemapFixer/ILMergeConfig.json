@@ -4,5 +4,8 @@
       "DotNetZip.dll",
       "ICSharpCode.TextEditor.dll"
     ]
+  },
+  "Advanced": {
+    "CopyAttributes": false
   }
 }
