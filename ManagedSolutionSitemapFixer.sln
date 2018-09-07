@@ -7,6 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagedSolutionSitemapFixer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagedSolutionSitemapFixer.Tests", "ManagedSolutionSitemapFixer.Tests\ManagedSolutionSitemapFixer.Tests.csproj", "{EF77BA76-FA5B-4671-A7D5-C65F9B3B1145}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{24807BA8-F9E1-43C2-A797-CB892C60B51C}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\CrmDev365.XrmToolBox.CrmManagedSolutionSitemapFixer.1.0.0.nupkg = NuGet\CrmDev365.XrmToolBox.CrmManagedSolutionSitemapFixer.1.0.0.nupkg
+		NuGet\CrmDev365.XrmToolBox.CrmManagedSolutionSitemapFixer.1.0.1.nupkg = NuGet\CrmDev365.XrmToolBox.CrmManagedSolutionSitemapFixer.1.0.1.nupkg
+		NuGet\CrmDev365.XrmToolBox.CrmManagedSolutionSitemapFixer.1.0.2.nupkg = NuGet\CrmDev365.XrmToolBox.CrmManagedSolutionSitemapFixer.1.0.2.nupkg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
